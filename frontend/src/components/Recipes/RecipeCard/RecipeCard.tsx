@@ -1,8 +1,10 @@
 import { FC } from 'react';
-import { RecipeModel } from '@/app/models/recipe.model.ts';
-import './RecipeCard.scss';
-import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { RecipeId, RecipeModel } from '@/app/models/recipe.model.ts';
+import { Stack, Typography } from '@mui/material';
+import { ReactComponent as TrashIcon } from '@/assets/icons/trash.svg';
+import { ReactComponent as EditIcon } from '@/assets/icons/edit.svg';
+import './RecipeCard.scss';
 
 type Props = {
   recipe: RecipeModel;
@@ -11,9 +13,10 @@ type Props = {
     media?: string;
     content?: string;
   };
+  handleDelete: (id: RecipeId) => void;
 };
 
-export const RecipeCard: FC<Props> = ({ recipe }) => {
+export const RecipeCard: FC<Props> = ({ recipe, handleDelete }) => {
   return (
     <Link to={`/recipes/${recipe.id}`} className="recipe-card">
       <div className="recipe-card__preview">
@@ -35,6 +38,20 @@ export const RecipeCard: FC<Props> = ({ recipe }) => {
         <Typography component="p" variant="text-sm" color="white" fontWeight={600} marginTop="4px">
           {recipe.cookingTime} мин
         </Typography>
+
+        <Stack direction="row" gap="15px" justifyContent="flex-end">
+          <Link to={`/recipes/${recipe.id}/edit`}>
+            <EditIcon />
+          </Link>
+          <span
+            onClick={(e) => {
+              e.preventDefault();
+              handleDelete(recipe.id);
+            }}
+          >
+            <TrashIcon />
+          </span>
+        </Stack>
       </div>
     </Link>
   );

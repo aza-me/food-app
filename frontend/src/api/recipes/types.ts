@@ -17,3 +17,7 @@ export interface GetRecipe {
 export interface CreateRecipe {
   (data: CreateRecipeModel): AxiosPromise<RecipeModel>;
 }
+
+export interface DeleteRecipe {
+  (id: RecipeId): AxiosPromise<RecipeModel>;
+}

@@ -9,6 +9,8 @@ import { useAppDispatch } from '@/app/hooks/store-hooks.ts';
 import { getAllRecipes } from '@/store/recipes/actions.ts';
 import { ReactComponent as SearchIcon } from '@/assets/icons/search.svg';
 import './RecipesPage.scss';
+import { RecipeId } from '@/app/models/recipe.model.ts';
+import { recipesService } from '@/api';
 
 type Props = {};
 
@@ -34,9 +36,17 @@ export const RecipesPage: FC<Props> = () => {
     dispatch(getAllRecipes({ search: filters.search, sortBy: filters.sortBy.value }));
   };
 
-  const handleSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
+  const handleSearchRecipe = debounce((e: ChangeEvent<HTMLInputElement>) => {
     setFilters({ ...filters, search: e.target.value });
   }, 300);
+
+  const handleDeleteRecipe = async (id: RecipeId) => {
+    try {
+      await recipesService.deleteRecipe(id);
+
+      getFilteredRecipes();
+    } catch {}
+  };
 
   return (
     <Layout>
@@ -46,7 +56,7 @@ export const RecipesPage: FC<Props> = () => {
             <UIInput
               placeholder="Поиск рецепта"
               InputProps={{ endAdornment: <SearchIcon /> }}
-              onChange={handleSearch}
+              onChange={handleSearchRecipe}
             />
           </div>
           <UISelect
@@ -56,7 +66,7 @@ export const RecipesPage: FC<Props> = () => {
             onChange={(_, t) => setFilters({ ...filters, sortBy: t as (typeof SORT_OPTIONS)[0] })}
           />
         </Stack>
-        <RecipesList />
+        <RecipesList handleDelete={handleDeleteRecipe} />
       </section>
     </Layout>
   );

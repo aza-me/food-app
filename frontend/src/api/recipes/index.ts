@@ -1,5 +1,5 @@
 import { instance } from '@/api';
-import { CreateRecipe, GetAllRecipes, GetRecipe } from '@/api/recipes/types.ts';
+import { CreateRecipe, DeleteRecipe, GetAllRecipes, GetRecipe } from '@/api/recipes/types.ts';
 
 export const getAllRecipes: GetAllRecipes = (params) => {
   return instance.get('/recipes', {
@@ -13,4 +13,8 @@ export const getRecipe: GetRecipe = (id) => {
 
 export const createRecipe: CreateRecipe = (data) => {
   return instance.post(`/recipes`, data);
+};
+
+export const deleteRecipe: DeleteRecipe = (id) => {
+  return instance.delete(`/recipes/${id}`);
 };

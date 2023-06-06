@@ -1,8 +1,14 @@
 import { CircularProgress, Grid } from '@mui/material';
 import { RecipeCard } from '@/components/Recipes';
 import { useAppSelector } from '@/app/hooks/store-hooks.ts';
+import { RecipeId } from '@/app/models/recipe.model.ts';
+import { FC } from 'react';
 
-export const RecipesList = () => {
+interface Props {
+  handleDelete: (id: RecipeId) => void;
+}
+
+export const RecipesList: FC<Props> = ({ handleDelete }) => {
   const { recipes } = useAppSelector((state) => state.recipes);
 
   return (
@@ -10,7 +16,7 @@ export const RecipesList = () => {
       {!recipes.loading ? (
         recipes.data.map((recipe) => (
           <Grid item xs={3}>
-            <RecipeCard recipe={recipe} />
+            <RecipeCard recipe={recipe} handleDelete={handleDelete} />
           </Grid>
         ))
       ) : (
