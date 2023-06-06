@@ -17,6 +17,12 @@ $silver: #5c5c5c;
   align-items: center;
 }
 
+@mixin flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @mixin no-wrap {
   white-space: nowrap;
   overflow: hidden;

@@ -21,7 +21,7 @@ export class RecipeController {
     @Query('sortBy') sortBy: 'ASC' | 'DESC',
     @Query('search') searchQuery: string,
   ): Promise<Recipe[]> {
-    await sleep(2000);
+    await sleep(1000);
     return this.recipeService.findAll(sortBy, searchQuery);
   }
 
@@ -32,6 +32,7 @@ export class RecipeController {
 
   @Post()
   async create(@Body() recipe: Recipe): Promise<Recipe> {
+    await sleep(1000);
     return this.recipeService.create(recipe);
   }
 

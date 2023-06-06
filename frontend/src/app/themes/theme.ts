@@ -41,7 +41,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           font: '14px Inter',
-          color: '#8080A6',
+          color: COLORS.TEXT_GRAY,
           marginBottom: '8px',
         },
         asterisk: {
@@ -80,20 +80,13 @@ export const theme = createTheme({
         },
       },
     },
-    MuiFormControlLabel: {
-      styleOverrides: {
-        label: {
-          font: '16px Inter',
-          userSelect: 'none',
-        },
-      },
-    },
     MuiFormHelperText: {
       styleOverrides: {
         root: {
-          font: '13px Inter',
+          font: '12px Inter',
           color: COLORS.DANGER,
           padding: 0,
+          marginTop: '6px',
         },
       },
     },

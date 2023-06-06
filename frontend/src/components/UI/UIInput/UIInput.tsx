@@ -4,7 +4,7 @@ import { TextField } from '@mui/material';
 import { UIInputProps } from './types';
 import './UIInput.scss';
 
-export const UIInput: React.ForwardRefRenderFunction<{}, UIInputProps> = ({ className = '', ...rest }, _) => {
+export const UIInput: React.ForwardRefRenderFunction<{}, UIInputProps> = ({ className = '', label, ...rest }, _) => {
   return (
     <TextField
       {...rest}

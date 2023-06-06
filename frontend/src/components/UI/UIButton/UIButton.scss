@@ -1,0 +1,53 @@
+@import "@/assets/styles/variables.scss";
+
+.ui-button {
+  font: 16px Inter;
+  padding: 12px 20px;
+  height: 38px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: .3s all;
+  column-gap: 10px;
+  text-decoration: none;
+
+  &--primary {
+    background: $primary;
+    color: $text-white;
+  }
+
+  &__square {
+    border-radius: 6px;
+  }
+
+  &__loader-container {
+    position: absolute;
+    left: 50%;
+    height: calc(100% + 3px);
+    width: calc(100% + 3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+
+    transform: translateX(-50%);
+  }
+
+  &__loader {
+    height: 30px !important;
+    width: 30px !important;
+  }
+
+  &__disabled {
+    opacity: .7;
+    border-color: transparent;
+  }
+
+  &__loading {
+    opacity: .7;
+  }
+}

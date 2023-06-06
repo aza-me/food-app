@@ -31,6 +31,10 @@
   &__saved-icon:hover {
     fill: $primary;
   }
+
+  &__create-recipe {
+    text-decoration: none;
+  }
 }
 
 .nav {
