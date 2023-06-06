@@ -6,6 +6,9 @@ export class Recipe {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ nullable: true })
+  author: string;
+
   @Column()
   title: string;
 

@@ -10,3 +10,15 @@ $bg-dark-1: #1e1e1e;
 $bg-dark-2: #151515;
 $bg-light-gray: #262626;
 $silver: #5c5c5c;
+
+@mixin flex-center-sb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin no-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

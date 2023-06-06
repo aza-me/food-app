@@ -1,0 +1,48 @@
+@import "@/assets/styles/variables.scss";
+
+.recipe-card {
+  display: block;
+  background: $black;
+  padding: 0 10px 10px;
+  text-decoration: none;
+  color: $text-gray;
+  border-radius: 4px;
+  position: relative;
+  height: 100%;
+
+  &__preview {
+    margin: 0 -10px 10px;
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+    z-index: 2;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__title {
+    @include no-wrap;
+  }
+
+}

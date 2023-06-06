@@ -1,0 +1,52 @@
+@import "@/assets/styles/variables.scss";
+
+.header {
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  background: $black;
+  box-shadow: 0 1px 0 $border-2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 62px;
+  z-index: 10000;
+
+  &__nav {
+    gap: 45px;
+    @include flex-center-sb;
+  }
+
+  &__logo {
+    margin-right: 60px;
+    font-size: 22px;
+    font-weight: 600;
+
+    span {
+      color: $primary;
+    }
+  }
+
+  &__saved-icon:hover {
+    fill: $primary;
+  }
+}
+
+.nav {
+  &__item {
+    @include flex-center-sb;
+    gap: 10px;
+    color: $text-white;
+    text-decoration: none;
+    font-size: 14px;
+
+    &-icon {
+      width: 20px;
+    }
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}

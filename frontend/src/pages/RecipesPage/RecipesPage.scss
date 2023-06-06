@@ -1,0 +1,11 @@
+@import "@/assets/styles/variables.scss";
+
+.recipes {
+  &__search {
+    min-width: 440px;
+  }
+
+  &__list {
+    margin-top: 20px;
+  }
+}
