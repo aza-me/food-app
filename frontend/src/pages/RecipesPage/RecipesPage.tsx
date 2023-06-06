@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, ChangeEvent } from 'react';
+import { debounce } from 'lodash';
 import { Stack } from '@mui/material';
 import { Layout } from '@/components/Layout';
 import { UIInput } from '@/components/UI/UIInput';
@@ -13,19 +14,29 @@ type Props = {};
 
 const SORT_OPTIONS = [
   { label: 'Не выбрано', value: '' },
-  { label: 'Новые', value: 'new' },
-  { label: 'Старые', value: 'old' },
+  { label: 'Быстрее', value: 'ASC' },
+  { label: 'Дольше', value: 'DESC' },
 ];
 
 export const RecipesPage: FC<Props> = () => {
   const dispatch = useAppDispatch();
 
-  const [search, setSearch] = useState('');
-  const [sortBy, setSortBy] = useState(SORT_OPTIONS[0]);
+  const [filters, setFilters] = useState({
+    search: '',
+    sortBy: SORT_OPTIONS[0],
+  });
 
   useEffect(() => {
-    dispatch(getAllRecipes());
-  }, []);
+    getFilteredRecipes();
+  }, [filters]);
+
+  const getFilteredRecipes = () => {
+    dispatch(getAllRecipes({ search: filters.search, sortBy: filters.sortBy.value }));
+  };
+
+  const handleSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
+    setFilters({ ...filters, search: e.target.value });
+  }, 300);
 
   return (
     <Layout>
@@ -33,17 +44,16 @@ export const RecipesPage: FC<Props> = () => {
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <div className="recipes__search">
             <UIInput
-              value={search}
               placeholder="Поиск рецепта"
               InputProps={{ endAdornment: <SearchIcon /> }}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={handleSearch}
             />
           </div>
           <UISelect
-            value={sortBy}
+            value={filters.sortBy}
             options={SORT_OPTIONS}
             disableClearable
-            onChange={(_, t) => setSortBy(t as (typeof SORT_OPTIONS)[0])}
+            onChange={(_, t) => setFilters({ ...filters, sortBy: t as (typeof SORT_OPTIONS)[0] })}
           />
         </Stack>
         <RecipesList />

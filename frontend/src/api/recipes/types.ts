@@ -2,7 +2,7 @@ import { AxiosPromise } from 'axios';
 import { CreateRecipeModel, RecipeId, RecipeModel } from '@/app/models/recipe.model.ts';
 
 export interface GetAllRecipesParams {
-  sortBy?: 'ASC' | 'DESC';
+  sortBy?: string;
   search?: string;
 }
 

@@ -2,9 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { recipesService } from '@/api';
 import { GetAllRecipesParams } from '@/api/recipes/types.ts';
 import { RecipeId } from '@/app/models/recipe.model.ts';
+import { isEmpty, omitBy } from 'lodash';
 
 export const getAllRecipes = createAsyncThunk('recipes/getRecipes', async (params: GetAllRecipesParams | undefined) => {
-  const { data: recipes } = await recipesService.getAllRecipes(params);
+  const { data: recipes } = await recipesService.getAllRecipes(omitBy(params, isEmpty));
 
   return recipes;
 });
