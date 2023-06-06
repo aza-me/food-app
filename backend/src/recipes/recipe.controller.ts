@@ -6,6 +6,7 @@ import {
   Delete,
   Body,
   Param,
+  Query,
 } from '@nestjs/common';
 import { Recipe } from './recipe.entity';
 import { RecipeService } from './recipe.service';
@@ -15,8 +16,11 @@ export class RecipeController {
   constructor(private readonly recipeService: RecipeService) {}
 
   @Get()
-  async findAll(): Promise<Recipe[]> {
-    return this.recipeService.findAll();
+  async findAll(
+    @Query('sortBy') sortBy: 'ASC' | 'DESC',
+    @Query('search') searchQuery: string,
+  ): Promise<Recipe[]> {
+    return this.recipeService.findAll(sortBy, searchQuery);
   }
 
   @Get(':id')

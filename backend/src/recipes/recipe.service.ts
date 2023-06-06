@@ -10,8 +10,23 @@ export class RecipeService {
     private readonly recipeRepository: Repository<Recipe>,
   ) {}
 
-  async findAll(): Promise<Recipe[]> {
-    return this.recipeRepository.find();
+  async findAll(
+    sortBy?: 'ASC' | 'DESC',
+    searchQuery?: string,
+  ): Promise<Recipe[]> {
+    const query = this.recipeRepository.createQueryBuilder('recipe');
+
+    if (sortBy) {
+      query.orderBy(`recipe.cookingTime`, sortBy);
+    }
+
+    if (searchQuery) {
+      query.where('recipe.title ILIKE :searchQuery', {
+        searchQuery: `%${searchQuery}%`,
+      });
+    }
+
+    return query.getMany();
   }
 
   async findOne(id: number): Promise<Recipe> {
