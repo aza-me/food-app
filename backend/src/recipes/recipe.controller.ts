@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { Recipe } from './recipe.entity';
 import { RecipeService } from './recipe.service';
+import { sleep } from '../utils/sleep';
 
 @Controller('recipes')
 export class RecipeController {
@@ -20,6 +21,7 @@ export class RecipeController {
     @Query('sortBy') sortBy: 'ASC' | 'DESC',
     @Query('search') searchQuery: string,
   ): Promise<Recipe[]> {
+    await sleep(2000);
     return this.recipeService.findAll(sortBy, searchQuery);
   }
 

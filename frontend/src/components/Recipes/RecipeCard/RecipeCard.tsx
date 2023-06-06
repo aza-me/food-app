@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { RecipeModel } from '@/app/models/recipe.model.ts';
 import './RecipeCard.scss';
 import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 type Props = {
   recipe: RecipeModel;
@@ -14,7 +15,7 @@ type Props = {
 
 export const RecipeCard: FC<Props> = ({ recipe }) => {
   return (
-    <div className="recipe-card">
+    <Link to={`/recipes/${recipe.id}`} className="recipe-card">
       <div className="recipe-card__preview">
         <div className="recipe-card__image">
           <img src={recipe.image} alt="Pizza" />
@@ -29,12 +30,12 @@ export const RecipeCard: FC<Props> = ({ recipe }) => {
         </Typography>
 
         <Typography component="p" variant="text-xs" marginTop="16px">
-          Time cook
+          Время приготовления:
         </Typography>
-        <Typography component="p" variant="text-sm" color="white" fontWeight={600} marginTop="3px">
-          {recipe.cookingTime} min
+        <Typography component="p" variant="text-sm" color="white" fontWeight={600} marginTop="4px">
+          {recipe.cookingTime} мин
         </Typography>
       </div>
-    </div>
+    </Link>
   );
 };

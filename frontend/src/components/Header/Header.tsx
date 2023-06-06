@@ -14,7 +14,7 @@ export const Header: FC<Props> = ({ className }) => {
   return (
     <header className={cn('header', className)}>
       <Stack width="100%" direction="row" justifyContent="space-between">
-        <Stack direction="row">
+        <Stack direction="row" alignItems="center">
           <div className="header__logo">
             <span>Food</span>App
           </div>
@@ -25,7 +25,7 @@ export const Header: FC<Props> = ({ className }) => {
             </NavLink>
           </nav>
         </Stack>
-        <Stack direction="row" alignItems="center" spacing="20px">
+        <Stack direction="row" alignItems="center" spacing="30px">
           <NavLink to="/saved">
             <HeartIcon className="header__saved-icon" />
           </NavLink>

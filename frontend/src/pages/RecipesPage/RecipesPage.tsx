@@ -1,13 +1,13 @@
 import { FC, useEffect, useState } from 'react';
-import { Grid, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { Layout } from '@/components/Layout';
 import { UIInput } from '@/components/UI/UIInput';
 import { UISelect } from '@/components/UI/UISelect';
-import { RecipeCard } from '@/components/Recipes';
+import { RecipesList } from '@/components/Recipes';
+import { useAppDispatch } from '@/app/hooks/store-hooks.ts';
+import { getAllRecipes } from '@/store/recipes/actions.ts';
 import { ReactComponent as SearchIcon } from '@/assets/icons/search.svg';
 import './RecipesPage.scss';
-import { useAppDispatch, useAppSelector } from '@/app/hooks/store-hooks.ts';
-import { getAllRecipes } from '@/store/recipes/actions.ts';
 
 type Props = {};
 
@@ -19,8 +19,6 @@ const SORT_OPTIONS = [
 
 export const RecipesPage: FC<Props> = () => {
   const dispatch = useAppDispatch();
-
-  const { recipes } = useAppSelector((state) => state.recipes);
 
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState(SORT_OPTIONS[0]);
@@ -48,13 +46,7 @@ export const RecipesPage: FC<Props> = () => {
             onChange={(_, t) => setSortBy(t as (typeof SORT_OPTIONS)[0])}
           />
         </Stack>
-        <Grid container rowSpacing="20px" columnSpacing="20px" marginTop={0}>
-          {recipes.data.map((recipe) => (
-            <Grid item xs={3}>
-              <RecipeCard recipe={recipe} />
-            </Grid>
-          ))}
-        </Grid>
+        <RecipesList />
       </section>
     </Layout>
   );
