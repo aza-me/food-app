@@ -83,11 +83,11 @@ export const RecipeDetailsPage: FC = () => {
                 </div>
               </div>
               <div className="recipe-details__part">
-                <RecipeTable data={currentRecipeComments.map((c) => c.content)} title="Комменты"></RecipeTable>
+                <RecipeTable data={currentRecipeComments.map((c) => c.content)} title="Комментарии"></RecipeTable>
 
                 <Stack direction="row" gap="15px" marginTop="15px">
-                  <UIInput value={comment} placeholder="Коммент" onChange={(e) => setComment(e.target.value)} />
-                  <UIButton onClick={handleCreateComment}>Создать</UIButton>
+                  <UIInput value={comment} placeholder="Комментария..." onChange={(e) => setComment(e.target.value)} />
+                  <UIButton onClick={handleCreateComment}>Добавить</UIButton>
                 </Stack>
               </div>
             </div>

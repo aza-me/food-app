@@ -15,7 +15,6 @@ import { recipesService } from '@/api';
 type Props = {};
 
 const SORT_OPTIONS = [
-  { label: 'Не выбрано', value: '' },
   { label: 'Быстрее', value: 'ASC' },
   { label: 'Дольше', value: 'DESC' },
 ];
