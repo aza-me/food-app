@@ -3,7 +3,6 @@ import cn from 'classnames';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Stack, Typography } from '@mui/material';
 import { UIButton } from '@/components/UI/UIButton';
-import { ReactComponent as HeartIcon } from '@/assets/icons/heart.svg';
 import { ReactComponent as BagIcon } from '@/assets/icons/bag.svg';
 import './Header.scss';
 
@@ -29,9 +28,6 @@ export const Header: FC<Props> = ({ className }) => {
           </nav>
         </Stack>
         <Stack direction="row" alignItems="center" spacing="30px">
-          <NavLink to="/saved">
-            <HeartIcon className="header__saved-icon" />
-          </NavLink>
           {location.pathname !== '/recipes/create' && (
             <NavLink to="/recipes/create" className="header__create-recipe">
               <UIButton type="button" color="primary">
