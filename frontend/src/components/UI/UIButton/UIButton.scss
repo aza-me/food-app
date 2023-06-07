@@ -14,6 +14,7 @@
   transition: .3s all;
   column-gap: 10px;
   text-decoration: none;
+  cursor: pointer;
 
   &--primary {
     background: $primary;

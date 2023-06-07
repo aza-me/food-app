@@ -1,16 +1,23 @@
+@import "@/assets/styles/variables.scss";
+
 .recipe-details {
   &__layout {
     padding: 62px 0 0;
+    background: $black;
   }
 
   &__left {
-    width: 41.25%;
+    width: 42%;
     &-inner {
       position: sticky;
       top: 62px;
       left: 0;
       width: 100%;
     }
+  }
+
+  &__right {
+    width: 58%;
   }
 
   &__image {
@@ -26,10 +33,6 @@
     }
   }
 
-  &__right {
-
-  }
-
   &__manage {
     margin-top: 12px;
     padding: 0 20px;
@@ -42,5 +45,37 @@
   &__to-recipes-btn {
     height: 35px;
     padding: 0 16px;
+  }
+
+  &__part {
+    padding: 40px;
+  }
+
+  &__title {
+    margin: 10px 0 !important;
+  }
+
+  &__author {
+    width: fit-content;
+    background: $bg-dark-1;
+    padding: 6px 10px;
+    border-radius: 4px;
+    color: $text-gray;
+    text-align: center;
+  }
+
+  &__ingredients-wrapper {
+    border: 1px solid $border-2
+  }
+
+  &__row {
+    padding: 14px;
+    &:nth-child(odd) {
+      background: $bg-dark-1;
+    }
+
+    &--title {
+      background: rgba($primary, .15) !important;
+    }
   }
 }

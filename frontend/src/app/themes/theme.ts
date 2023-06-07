@@ -25,6 +25,9 @@ export const theme = createTheme({
     'text-md': {
       font: '20px Inter',
     },
+    'text-lg': {
+      font: '24px Inter',
+    },
   },
   components: {
     MuiButtonBase: {

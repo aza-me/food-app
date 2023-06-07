@@ -5,6 +5,7 @@ declare global {
       'text-sm': React.CSSProperties;
       'text-default': React.CSSProperties;
       'text-md': React.CSSProperties;
+      'text-lg': React.CSSProperties;
     }
 
     interface TypographyVariantsOptions {
@@ -12,6 +13,7 @@ declare global {
       'text-sm': React.CSSProperties;
       'text-default': React.CSSProperties;
       'text-md': React.CSSProperties;
+      'text-lg': React.CSSProperties;
     }
 
     interface Palette {
@@ -44,6 +46,7 @@ declare global {
       'text-sm': true;
       'text-default': true;
       'text-md': true;
+      'text-lg': true;
     }
   }
 }
