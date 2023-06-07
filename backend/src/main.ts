@@ -4,7 +4,7 @@ import 'dotenv/config';
 import { json, urlencoded } from 'express';
 
 async function bootstrap() {
-  const PORT = process.env.PORT || 8000;
+  const PORT = process.env.PORT || 9000;
   const app = await NestFactory.create(AppModule);
 
   app.enableCors();

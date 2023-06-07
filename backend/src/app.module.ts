@@ -11,13 +11,13 @@ import { Comment } from './comments/comment.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: 'postgresql://doadmin:AVNS_ZOy1wZQ8-U1sPZoYTKc@db-postgresql-nyc1-32147-do-user-14205391-0.b.db.ondigitalocean.com:25060/defaultdb',
-      synchronize: true,
-      logging: true,
+      host: process.env.POSTGRES_HOST,
+      port: Number(process.env.POSTGRES_PORT),
+      username: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      database: process.env.POSTGRES_DB,
       entities: [Recipe, Comment],
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      synchronize: true,
     }),
     TypeOrmModule.forFeature([Recipe, Comment]),
   ],
