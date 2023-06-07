@@ -82,9 +82,9 @@ export const EditRecipePage = () => {
         cookingTime: Number(data.cookingTime),
       };
 
-      await recipesService.editRecipe(Number(recipeId), createRecipeData);
+      const { data: recipe } = await recipesService.editRecipe(Number(recipeId), createRecipeData);
 
-      navigate('/');
+      navigate(`/recipes/${recipe.id}`);
     } finally {
       setLoading(false);
     }
