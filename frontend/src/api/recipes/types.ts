@@ -1,5 +1,5 @@
 import { AxiosPromise } from 'axios';
-import { CreateRecipeModel, RecipeId, RecipeModel } from '@/app/models/recipe.model.ts';
+import { CreateRecipeModel, EditRecipeModel, RecipeId, RecipeModel } from '@/app/models/recipe.model.ts';
 import { CommentModel, CreateCommentModel } from '@/app/models/comment.model.ts';
 
 export interface GetAllRecipesParams {
@@ -17,6 +17,10 @@ export interface GetRecipe {
 
 export interface CreateRecipe {
   (data: CreateRecipeModel): AxiosPromise<RecipeModel>;
+}
+
+export interface EditRecipe {
+  (id: RecipeId, data: EditRecipeModel): AxiosPromise<RecipeModel>;
 }
 
 export interface DeleteRecipe {

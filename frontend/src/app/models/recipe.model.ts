@@ -13,3 +13,4 @@ export interface RecipeModel {
 export interface RecipeDetailedModel extends RecipeModel {}
 
 export interface CreateRecipeModel extends Omit<RecipeModel, 'id'> {}
+export interface EditRecipeModel extends Omit<RecipeModel, 'id'> {}

@@ -6,6 +6,7 @@ import {
   GetRecipe,
   CreateRecipeComment,
   GetRecipeComments,
+  EditRecipe,
 } from '@/api/recipes/types.ts';
 
 export const getAllRecipes: GetAllRecipes = (params) => {
@@ -20,6 +21,10 @@ export const getRecipe: GetRecipe = (id) => {
 
 export const createRecipe: CreateRecipe = (data) => {
   return instance.post(`/recipes`, data);
+};
+
+export const editRecipe: EditRecipe = (id, data) => {
+  return instance.put(`/recipes/${id}`, data);
 };
 
 export const deleteRecipe: DeleteRecipe = (id) => {

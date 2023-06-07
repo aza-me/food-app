@@ -6,16 +6,23 @@ import { convertToBase64 } from '@/app/utils/convertToBase64.tsx';
 import './UploadImage.scss';
 
 interface FileModel {
-  file: File;
+  file: File | '';
   preview: string;
 }
 
 interface Props {
+  preview?: string;
   onChange: (base64: string) => void;
 }
 
-export const UploadRecipeImage: FC<Props> = ({ onChange }) => {
+export const UploadRecipeImage: FC<Props> = ({ preview, onChange }) => {
   const [files, setFiles] = useState<FileModel[]>([]);
+
+  useEffect(() => {
+    if (preview) {
+      setFiles([{ preview, file: '' }]);
+    }
+  }, [preview]);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
