@@ -173,7 +173,7 @@ export const EditRecipePage = () => {
             <Grid item xs={12}>
               <Stack direction="row" justifyContent="flex-end">
                 <UIButton type="submit" loading={loading}>
-                  Создать рецепт
+                  Сохранить рецепт
                 </UIButton>
               </Stack>
             </Grid>

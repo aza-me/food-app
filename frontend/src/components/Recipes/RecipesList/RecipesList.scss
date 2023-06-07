@@ -1,0 +1,10 @@
+@import "@/assets/styles/variables.scss";
+
+.recipes__list-placeholder {
+  text-align: center;
+  background: $bg-dark-2;
+  margin-top: 20px;
+  color: $text-gray;
+  padding: 60px 0;
+  border-radius: 4px;
+}

@@ -1,14 +1,17 @@
 import { FC, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/store-hooks.ts';
 import { getRecipe, getRecipeComments } from '@/store/recipes/actions.ts';
-import './RecipeDetailsPage.scss';
 import { UIButton } from '@/components/UI/UIButton';
 import { Stack, Typography } from '@mui/material';
 import { RecipeTable } from '@/components/RecipeDetails/RecipeTable';
 import { UIInput } from '@/components/UI/UIInput';
 import { recipesService } from '@/api';
+import { ReactComponent as TrashIcon } from '@/assets/icons/trash.svg';
+import { ReactComponent as EditIcon } from '@/assets/icons/edit.svg';
+import './RecipeDetailsPage.scss';
+import { RecipeId } from '@/app/models/recipe.model.ts';
 
 type Params = {
   recipeId: string;
@@ -16,6 +19,7 @@ type Params = {
 
 export const RecipeDetailsPage: FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { recipeId } = useParams<Params>();
 
   const {
@@ -38,6 +42,14 @@ export const RecipeDetailsPage: FC = () => {
     } finally {
       setComment('');
     }
+  };
+
+  const handleDeleteRecipe = async (id: RecipeId) => {
+    try {
+      await recipesService.deleteRecipe(id);
+
+      navigate('/');
+    } catch {}
   };
 
   return (
@@ -63,12 +75,28 @@ export const RecipeDetailsPage: FC = () => {
             </div>
             <div className="recipe-details__right">
               <div className="recipe-details__part">
-                <Typography component="p" variant="text-xs" color="gray" className="recipe-details__recipe">
-                  Рецепт:{' '}
-                  <Typography component="span" variant="text-sm" color="white">
-                    {recipe.cookingTime} мунут
+                <Stack direction="row" justifyContent="space-between">
+                  <Typography component="p" variant="text-xs" color="gray" className="recipe-details__recipe">
+                    Рецепт:{' '}
+                    <Typography component="span" variant="text-sm" color="white">
+                      {recipe.cookingTime} мунут
+                    </Typography>
                   </Typography>
-                </Typography>
+                  <Stack direction="row" gap="15px" justifyContent="flex-end">
+                    <Link to={`/recipes/${recipe.id}/edit`}>
+                      <EditIcon />
+                    </Link>
+                    <span
+                      className="pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleDeleteRecipe(recipe.id);
+                      }}
+                    >
+                      <TrashIcon />
+                    </span>
+                  </Stack>
+                </Stack>
                 <Typography component="h3" variant="text-lg" fontWeight={600} className="recipe-details__title">
                   {recipe.title}
                 </Typography>
