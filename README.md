@@ -2,6 +2,17 @@
 
 <hr />
 
+### Prerequisites
+
+Please install the following software before starting development:
+
+- [Git 2.10+](https://git-scm.com/downloads)
+- [Node.js LTS](https://nodejs.org/en/download/)
+- [Docker](https://docs.docker.com/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+<hr />
+
 ### Backend
 
 ### Run Docker Container
