@@ -1,35 +1,54 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
-import { Stack, Typography } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '@/app/hooks/store-hooks.ts';
+import { getRecipe, getRecipeComments } from '@/store/recipes/actions.ts';
 import './RecipeDetailsPage.scss';
 import { UIButton } from '@/components/UI/UIButton';
-import { useAppDispatch, useAppSelector } from '@/app/hooks/store-hooks.ts';
-import { getRecipe } from '@/store/recipes/actions.ts';
+import { Stack, Typography } from '@mui/material';
+import { RecipeTable } from '@/components/RecipeDetails/RecipeTable';
+import { UIInput } from '@/components/UI/UIInput';
+import { recipesService } from '@/api';
 
 type Params = {
-  id: string;
+  recipeId: string;
 };
 
 export const RecipeDetailsPage: FC = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams<Params>();
+  const { recipeId } = useParams<Params>();
 
-  const { currentRecipe } = useAppSelector((state) => state.recipes);
+  const {
+    currentRecipe: { data: recipe },
+    currentRecipeComments,
+  } = useAppSelector((state) => state.recipes);
+
+  const [comment, setComment] = useState('');
 
   useEffect(() => {
-    dispatch(getRecipe(+id!));
+    dispatch(getRecipe(Number(recipeId)));
+    dispatch(getRecipeComments(Number(recipeId)));
   }, []);
+
+  const handleCreateComment = async () => {
+    try {
+      await recipesService.createRecipeComment(Number(recipeId), { content: comment });
+
+      dispatch(getRecipeComments(Number(recipeId)));
+    } finally {
+      setComment('');
+    }
+  };
 
   return (
     <Layout classes={{ main: 'recipe-details__layout' }}>
-      <section className="recipe-details">
-        {currentRecipe.data && (
+      {recipe && (
+        <section className="recipe-details">
           <Stack direction="row">
             <div className="recipe-details__left">
               <div className="recipe-details__left-inner">
                 <div className="recipe-details__image">
-                  <img src={currentRecipe.data.image} alt="Image" />
+                  <img src={recipe.image} alt="Image" />
                 </div>
                 <div className="recipe-details__manage">
                   <Link to="/" className="recipe-details__to-recipes-link">
@@ -47,39 +66,34 @@ export const RecipeDetailsPage: FC = () => {
                 <Typography component="p" variant="text-xs" color="gray" className="recipe-details__recipe">
                   Рецепт:{' '}
                   <Typography component="span" variant="text-sm" color="white">
-                    {currentRecipe.data.cookingTime} мунут
+                    {recipe.cookingTime} мунут
                   </Typography>
                 </Typography>
                 <Typography component="h3" variant="text-lg" fontWeight={600} className="recipe-details__title">
-                  {currentRecipe.data.title}
+                  {recipe.title}
                 </Typography>
                 <Typography component="div" variant="text-xs" className="recipe-details__author">
-                  Author: {currentRecipe.data.author}
+                  Author: {recipe.author}
                 </Typography>
                 <Typography component="p" variant="text-sm" marginTop="20px">
-                  {currentRecipe.data.description}
+                  {recipe.description}
                 </Typography>
-                <div>
-                  <Stack marginTop="20px" className="recipe-details__ingredients-wrapper">
-                    <div className="recipe-details__row recipe-details__row--title">
-                      <Typography component="p" variant="text-sm">
-                        Ингредиенты:
-                      </Typography>
-                    </div>
-                    {currentRecipe.data.ingredients.map((ingredient) => (
-                      <div className="recipe-details__row">
-                        <Typography component="p" variant="text-sm">
-                          {ingredient}
-                        </Typography>
-                      </div>
-                    ))}
-                  </Stack>
+                <div className="recipe-details__ingredients">
+                  <RecipeTable data={recipe.ingredients} title="Ингредиенты" />
                 </div>
+              </div>
+              <div className="recipe-details__part">
+                <RecipeTable data={currentRecipeComments.map((c) => c.content)} title="Комменты"></RecipeTable>
+
+                <Stack direction="row" gap="15px" marginTop="15px">
+                  <UIInput value={comment} placeholder="Коммент" onChange={(e) => setComment(e.target.value)} />
+                  <UIButton onClick={handleCreateComment}>Создать</UIButton>
+                </Stack>
               </div>
             </div>
           </Stack>
-        )}
-      </section>
+        </section>
+      )}
     </Layout>
   );
 };

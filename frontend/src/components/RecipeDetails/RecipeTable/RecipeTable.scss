@@ -1,0 +1,18 @@
+@import "@/assets/styles/variables.scss";
+
+.recipe-table {
+  border: 1px solid $border-2;
+  border-radius: 6px;
+  overflow: hidden;
+
+  &__row {
+    padding: 14px;
+    &:nth-child(odd) {
+      background: $bg-dark-1;
+    }
+
+    &--title {
+      background: rgba($primary, .15) !important;
+    }
+  }
+}

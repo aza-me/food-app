@@ -15,3 +15,9 @@ export const getRecipe = createAsyncThunk('recipes/getRecipe', async (id: Recipe
 
   return recipe;
 });
+
+export const getRecipeComments = createAsyncThunk('recipes/getRecipeComments', async (id: RecipeId) => {
+  const { data: recipe } = await recipesService.getRecipeComments(id);
+
+  return recipe;
+});

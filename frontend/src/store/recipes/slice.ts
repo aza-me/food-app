@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RecipesState } from '@/store/recipes/types.ts';
-import { getAllRecipes, getRecipe } from '@/store/recipes/actions.ts';
+import { getAllRecipes, getRecipe, getRecipeComments } from '@/store/recipes/actions.ts';
 import { RecipeModel } from '@/app/models/recipe.model.ts';
 
 const initialState: RecipesState = {
@@ -10,6 +10,7 @@ const initialState: RecipesState = {
   currentRecipe: {
     data: null,
   },
+  currentRecipeComments: [],
 };
 
 export const recipesSlice = createSlice({
@@ -38,6 +39,12 @@ export const recipesSlice = createSlice({
       .addCase(getRecipe.fulfilled, (state, action) => {
         state.currentRecipe.data = action.payload;
         state.currentRecipe.loading = false;
+      })
+      .addCase(getRecipeComments.pending, (state) => {
+        state.currentRecipeComments = [];
+      })
+      .addCase(getRecipeComments.fulfilled, (state, action) => {
+        state.currentRecipeComments = action.payload;
       });
   },
 });

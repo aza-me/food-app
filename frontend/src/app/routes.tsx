@@ -9,7 +9,7 @@ const routes = createBrowserRouter([
     element: <RecipesPage />,
   },
   {
-    path: '/recipes/:id',
+    path: '/recipes/:recipeId',
     element: <RecipeDetailsPage />,
   },
   {
