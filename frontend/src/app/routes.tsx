@@ -1,11 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { RecipesPage } from '@/pages/RecipesPage';
 import { CreateRecipePage } from '@/pages/CreateRecipePage';
+import { RecipeDetailsPage } from '@/pages/RecipeDetailsPage';
 
 const routes = createBrowserRouter([
   {
     path: '/',
     element: <RecipesPage />,
+  },
+  {
+    path: '/recipes/:id',
+    element: <RecipeDetailsPage />,
   },
   {
     path: '/recipes/create',

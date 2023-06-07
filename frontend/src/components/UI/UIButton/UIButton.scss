@@ -18,6 +18,12 @@
   &--primary {
     background: $primary;
     color: $text-white;
+
+    &.ui-button__outline {
+      border: 1px solid $primary;
+      background: transparent;
+      color: $primary;
+    }
   }
 
   &__square {
