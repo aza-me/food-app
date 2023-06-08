@@ -13,11 +13,13 @@ Please install the following software before starting development:
 
 <hr />
 
-### Backend
-
 ### Steps
 
 - Clone [repository](https://github.com/aza-me](https://github.com/aza-me/food-app)
+
+<hr />
+
+### Backend
 
 ### Run Docker Container
 
