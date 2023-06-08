@@ -15,6 +15,10 @@ Please install the following software before starting development:
 
 ### Backend
 
+### Steps
+
+- Clone [repository](https://github.com/aza-me](https://github.com/aza-me/food-app)
+
 ### Run Docker Container
 
 You will need docker installed on your machine
